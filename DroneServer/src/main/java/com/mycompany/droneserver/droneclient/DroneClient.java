@@ -14,11 +14,14 @@ import java.net.UnknownHostException;
  * @author Zac
  */
 public class DroneClient {
+    
+    
+    
     public static void main(String args[]) {
 
         Socket s = null;
         String hostName = "localhost";
-        String message = "Hello";
+        String message = "Hello and welcome";
 
         try {
             int serverPort = 4444;
@@ -39,5 +42,25 @@ public class DroneClient {
                 System.out.println("close:" + e.getMessage());
             }
         }
+    }
+    //print following to command line
+    private void registerDrone(){
+        //ask user to enter drone info
+        //ask for drone name
+        //ask for drone id
+        //connect to server
+        //ask for position of drone
+    }
+    private void droneMessage(){
+        //drone sends location every 10 seconds
+        //send acknowledgement back
+    }
+    private void fireDetect(){
+        //if drone detects fire report position to server
+        //report fire position
+    }
+    private void recallMessage(){
+        //recall message to drones
+        //return message that drone is shutting down and returning to base
     }
 }

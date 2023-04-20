@@ -7,6 +7,8 @@ package com.mycompany.droneserver;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -61,6 +63,7 @@ public class DroneServer {
     }
 
     private void makeGui() throws IOException {
+        //create the jframe for the gui 
         frmDroneFire = new JFrame();
         frmDroneFire.getContentPane().setBackground(UIManager.getColor("Menubar.highlight"));
         frmDroneFire.setForeground(Color.white);
@@ -68,24 +71,41 @@ public class DroneServer {
         frmDroneFire.setTitle("Drone and Fire map");
         frmDroneFire.getContentPane().setForeground(Color.white);
         frmDroneFire.setBounds(150, 150, 650, 600);
-        frmDroneFire.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmDroneFire.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// allows user to exit
         frmDroneFire.getContentPane().setLayout(null);
         
-        lblHeader = new JLabel();
+        lblHeader = new JLabel();//label to act as header
         lblHeader.setFont(new Font("Comic Sans MS",Font.BOLD, 32));
         lblHeader.setBounds(200, 25, 650, 70);
         lblHeader.setText("Drone Map of Area");
-        frmDroneFire.getContentPane().add(lblHeader);
+        frmDroneFire.getContentPane().add(lblHeader);//add label to jframe
         
+        //create 10 buttons for user to interact with
+        
+        //load data from files, fires.xlsx and binary files
         btnLoadData = new JButton();
+        //create an action for when the button is clicked
+        btnLoadData.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                //load file from fire.xlsx
+                
+                //load from binary file
+            }
+        });
         btnLoadData.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnLoadData.setForeground(Color.white);
         btnLoadData.setBackground(Color.gray);
         btnLoadData.setBounds(25, 75, 160, 40);
         btnLoadData.setText("Load Data");
-        frmDroneFire.getContentPane().add(btnLoadData);
+        frmDroneFire.getContentPane().add(btnLoadData);//add button onto jframe
         
+        //Display current information about the map, read data from file and output
         btnDisplayMap = new JButton();
+        btnDisplayMap.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnDisplayMap.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnDisplayMap.setForeground(Color.white);
         btnDisplayMap.setBackground(Color.gray);
@@ -93,7 +113,13 @@ public class DroneServer {
         btnDisplayMap.setText("Display Map");
         frmDroneFire.getContentPane().add(btnDisplayMap);
         
+        //instruct drone, send messages to drone and drone must acknowledge back
         btnInstructDrone = new JButton();
+        btnInstructDrone.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnInstructDrone.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnInstructDrone.setForeground(Color.white);
         btnInstructDrone.setBackground(Color.gray);
@@ -101,7 +127,13 @@ public class DroneServer {
         btnInstructDrone.setText("Instruct Drone");
         frmDroneFire.getContentPane().add(btnInstructDrone);
         
+        //receive drone details from client side
         btnReceiveDroneDetails = new JButton();
+        btnReceiveDroneDetails.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnReceiveDroneDetails.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnReceiveDroneDetails.setForeground(Color.white);
         btnReceiveDroneDetails.setBackground(Color.gray);
@@ -109,7 +141,13 @@ public class DroneServer {
         btnReceiveDroneDetails.setText("Receive Drone Details");
         frmDroneFire.getContentPane().add(btnReceiveDroneDetails);
         
+        //save drone details to a binary file that cannot be overidden
         btnSaveDrone = new JButton();
+        btnSaveDrone.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnSaveDrone.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnSaveDrone.setForeground(Color.white);
         btnSaveDrone.setBackground(Color.gray);
@@ -117,7 +155,13 @@ public class DroneServer {
         btnSaveDrone.setText("Save Drone");
         frmDroneFire.getContentPane().add(btnSaveDrone);
         
+        //display the position of the drone on the map. new drones only
         btnDisplayDrone = new JButton();
+        btnDisplayDrone.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnDisplayDrone.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnDisplayDrone.setForeground(Color.white);
         btnDisplayDrone.setBackground(Color.gray);
@@ -125,7 +169,13 @@ public class DroneServer {
         btnDisplayDrone.setText("Display Drone");
         frmDroneFire.getContentPane().add(btnDisplayDrone);
         
+        //delete fire once the fire has been attended to
         btnDeleteFire = new JButton();
+        btnDeleteFire.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnDeleteFire.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnDeleteFire.setForeground(Color.white);
         btnDeleteFire.setBackground(Color.gray);
@@ -133,7 +183,13 @@ public class DroneServer {
         btnDeleteFire.setText("Delete Fire");
         frmDroneFire.getContentPane().add(btnDeleteFire);
         
+        //recall all drones to base, receive acknowledgement from drones
         btnRecallDrone = new JButton();
+        btnRecallDrone.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnRecallDrone.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnRecallDrone.setForeground(Color.white);
         btnRecallDrone.setBackground(Color.gray);
@@ -141,7 +197,13 @@ public class DroneServer {
         btnRecallDrone.setText("Recall Drone");
         frmDroneFire.getContentPane().add(btnRecallDrone);
         
+        //move a drone to a new position manually
         btnMoveDrone = new JButton();
+        btnMoveDrone.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnMoveDrone.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnMoveDrone.setForeground(Color.white);
         btnMoveDrone.setBackground(Color.gray);
@@ -149,7 +211,13 @@ public class DroneServer {
         btnMoveDrone.setText("Move Drone");
         frmDroneFire.getContentPane().add(btnMoveDrone);
         
+        //shuts down the server, recalls all drones back to base
         btnShutDown = new JButton();
+        btnShutDown.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        });
         btnShutDown.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
         btnShutDown.setForeground(Color.white);
         btnShutDown.setBackground(Color.gray);

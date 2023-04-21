@@ -11,9 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,6 +44,9 @@ public class DroneServer {
     private JButton btnShutDown;
 //    private JPanel pnlMap;
     private static JLabel lblHeader;
+    
+    LinkedList<Drone> droneList = new LinkedList<Drone>();
+    LinkedList<Fire> fireList = new LinkedList<Fire>();
 
     public static void main(String[] args) {
         try {
@@ -49,6 +58,7 @@ public class DroneServer {
             while (true) {
                 Socket clientSocket = listenSocket.accept();
                 Connection c = new Connection(clientSocket);
+                
                 System.out.printf("\nServer waiting on: %d for client from %d ",
                         listenSocket.getLocalPort(), clientSocket.getPort());
             }
@@ -88,7 +98,13 @@ public class DroneServer {
         btnLoadData.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 //load file from fire.xlsx
-                
+                File readFile = new File("fires.xlsx");
+                try{
+                    Scanner read = new Scanner(readFile);
+                }
+                catch(FileNotFoundException ex){
+                    ex.printStackTrace();
+                }
                 //load from binary file
             }
         });
@@ -145,6 +161,25 @@ public class DroneServer {
         btnSaveDrone = new JButton();
         btnSaveDrone.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                File file = new File("drone.ser");
+                boolean isFileExisting = file.exists();
+                try{
+                    FileOutputStream fileOut = new FileOutputStream(file);
+                    ObjectOutputStream dataOut = new ObjectOutputStream(fileOut);
+                    if(!isFileExisting){
+                                              
+                    }
+                    for(Drone drone:droneList){
+                        dataOut.writeObject(drone);
+                        
+                    }
+                }
+                catch(FileNotFoundException ex){
+                    ex.printStackTrace();
+                }
+                catch(IOException exe){
+                            exe.printStackTrace();
+                        }
                 
             }
         });
@@ -201,7 +236,7 @@ public class DroneServer {
         btnMoveDrone = new JButton();
         btnMoveDrone.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                
+
             }
         });
         btnMoveDrone.setFont(new Font("Comic Sans MS",Font.BOLD, 16));
@@ -215,6 +250,7 @@ public class DroneServer {
         btnShutDown = new JButton();
         btnShutDown.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                
                 
             }
         });
@@ -248,7 +284,18 @@ class Connection extends Thread {
     }
 
     public void run() {
-
+        
     }
 
 }
+
+//class MultiThread() implements Runnable{
+  //  private Thread drone;
+    //private String droneName;
+    
+    //Multithread(String name){
+      //  droneName = name;
+        //System.out.println("Creating " + droneName);
+    //}
+//}
+
